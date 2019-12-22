@@ -15,6 +15,7 @@ const login = require('./routes/login');
 const paramParse = require('./src/util/handleParams');
 const register = require('./routes/register');
 const urlLog = require('./src/util/urlLog');
+let filesRouter = require('./routes/files');
 
 var app = express();
 
@@ -65,6 +66,7 @@ app.use(paramParse);
 app.use('/', appRouter);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/files', filesRouter);// 下载文件
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
@@ -82,6 +84,9 @@ app.use('/register', register);
 // 	res.render('error');
 // 	next();
 // });
-
+global.Data = {
+	filePath : path.join(__dirname, 'public/files/'),
+	rootPath : path.join(__dirname)
+};
 
 module.exports = app;
